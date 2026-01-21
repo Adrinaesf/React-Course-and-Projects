@@ -6,6 +6,8 @@
         - return 1 html element (usually html element)
         - self-closing element: In calse we had nothing to write in: <input />
     
+    - They are reusabe!!!
+    
     2. Creteing our own HTML elements: 
     - After we make the function we can write it as {ChatInput()}: But the best is
     const div = (
@@ -17,9 +19,34 @@
       3. Fragments: 
       - Grouping the elements without making a div
 
+      4. Props: 
+      - It is an object that conatins all the attributes in it:
+      - Makes our components reusable:
+      
+      
+      5. SHORTCUTS: 
+        const message = props.message; 
+         - const {sender} = props; 
+         - function ChatMessage({message, sender}){
 
+      6. If statments in JSX: 
+      - A && B: IF A is true then do B
 
-
+      if (sender === "user") {
+          return (
+          <div>
+            {message}
+            <img src="user.png" width="50" />
+          </div>
+          );
+        } else {
+          return (
+            <div>
+              <img src="robot.png" width="50" />
+              {message}
+            </div>
+          );
+        }
 
 
 --> 
@@ -47,13 +74,50 @@
           </>
         );
       }
+      function ChatMessage({message, sender}){
+        // const message = props.message; 
+        // const {sender} = props; 
+        // const {sender, message} = props; 
+        return (
+          <div>
+            {sender === 'robot' && (
+              <img src="robot.png" width="50" />
+            )}
+
+            {message}
+
+            {sender === 'user' && (
+              <img src="user.png" width="50" />
+            )}
+
+          </div>
+        );
+      }
 
       const app = (
         <>
             <ChatInput /> 
+            <ChatMessage 
+              message="Hi chatbot" 
+              sender="user" 
+            />
+
+            <ChatMessage 
+              message="Hello! How cna I help you?" 
+              sender="robot"
+            />
+
+            <ChatMessage 
+              message="Can you give me today's date?" 
+              sender="user" 
+            />
+
+            <ChatMessage 
+              message="Today is January 21st 2026" 
+              sender="robot"
+            />
         </>
       ); 
-
       const container = document.querySelector('.js-container');
       ReactDOM.createRoot(container).render(app);
     </script>
