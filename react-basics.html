@@ -31,6 +31,18 @@
     - Problem with JSX: WEb browser can't understand JSX, solution:
         * loading the babel library
         * Tell babel to translate the code by writing: <script class="text/babel">
+    
+    - Displaying multiply elements in our div in React
+    - Steps: 
+        * make a div
+        * put your elements in that
+        div = <div> <p>hi</p> <button>bye</button> </div> -> adn display div
+    
+    - Benefits of React:
+        * It's more natural 
+        * Good for debugging
+        * Inserting values in JSX: 
+            - Ex: <p>"The addition is: 2+2 = " {2+2} </p>
 --> 
 
 <!DOCTYPE html>
@@ -38,6 +50,7 @@
   <head>
     <title>React Basics</title>
   </head>
+
   <body>
     <div class="js-container"></div>
 
@@ -46,19 +59,21 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     
-    
-    
     <script type="text/babel">
       // document: JS object that get html element: 
       // So now we have the container
-      const button = <button>Hi</button>
-      const paragraph = <p>This is a parargraph element </p>
+      const button = <button>Hi</button>; 
+      const paragraph = <p>This is a parargraph element </p>; 
+      
+      const div = (
+        <div>
+            <button>Hi</button>
+            <p>"The addition is: 2+2 = " {2+2} </p>
+        </div>
+        ); 
 
       const container = document.querySelector('.js-container');
-      ReactDOM.createRoot(container).render(button);
-      ReactDom.createRoot(container).render(paragraph);
-
-
+      ReactDOM.createRoot(container).render(div);
     </script>
 
   </body>
