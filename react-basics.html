@@ -1,0 +1,65 @@
+<!-- 
+    1. In this section we lean: 
+    - what is react: 
+    -  Recall: How we reload JS to HTML 
+        * <script>
+        * loading the file  <script src="file_name"></script>
+        * External Library: <script src="URL_of_Library"></script>
+
+        Now react is also an external library that has code
+        We can upload and use it :D
+
+        - React helps us use teh functions to creat websites. 
+
+    2. Review: 
+    - document.querySelector: gets html elemnt an dput it into JS
+    
+    3. Getting Started:
+    - We always need a di/container to put our react stuff into it:
+    - Steps: 
+        * create div elem in html
+        * get it in JS using DOM
+        * Write: ReactDOM.createRoot(container).render(text)
+    
+    - render() prints in Rect
+
+    4. Babel: JS compiler -> Translate other languages to JS
+    - In react we use enhanced version of JS: Called "JSX"
+        * This is JS but accepts HTML elemt/code as well:
+        * Ex: const button = <button> Hi </button> 
+        
+    - Problem with JSX: WEb browser can't understand JSX, solution:
+        * loading the babel library
+        * Tell babel to translate the code by writing: <script class="text/babel">
+--> 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    
+    
+    
+    <script type="text/babel">
+      // document: JS object that get html element: 
+      // So now we have the container
+      const button = <button>Hi</button>
+      const paragraph = <p>This is a parargraph element </p>
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(button);
+      ReactDom.createRoot(container).render(paragraph);
+
+
+    </script>
+
+  </body>
+</html>
