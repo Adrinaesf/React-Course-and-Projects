@@ -1,4 +1,5 @@
 <!-- 
+    Lectrue 1: 
     1. Components: 
     - A piece of web: When building website, it's better to make a small components of each of them 
     - Steps: 
@@ -47,9 +48,82 @@
             </div>
           );
         }
-
-
 --> 
+
+<!------------------------------------------------------------------------------------->
+
+
+<!-- 
+  Lecture 2: 
+  1. Cleaning the code:
+  - Save the data and attributes to a list using objects: 
+  - ex: const chatMessages = [{
+          message: 'Hi chatbot', 
+          sender: 'user'
+        }]
+  
+  - Then we want to apply teh <ChatMessage /> to it. So what we do is: 
+  1. Use the map function. 
+  - Take an input as elements of array
+  - apply a function
+  - return a new value
+  - Map: obj -> obj
+
+  * Ex: chatMessages.map((list_elem) => {
+          <ChatMessage 
+            message={list_elem.message} 
+            sender={list_elem.sender}
+          />
+        });
+
+  So far: summary: 
+        1. Save the data, 
+        2. MAke the code better and reusable
+        3. Make it interactive
+
+  
+  3. Event Handler = run a function when we interact with the website such as:
+  <button onClick={function}> </button>
+  Ex: 
+  function sendMessage(){
+          chatMessages.push({
+            message: 'test', 
+            sender: 'user', 
+            id: crypto.randomUUID()
+          })
+        }
+Where chatMessage is a list, and we add an object to our list. 
+  
+
+  4. State 
+  - data that is connected to HTML
+  - When we update this data, it will update the HTMl!!!!
+
+  * Converting chatMessages to state
+  const array = React.useState(listof Data)
+  * state saves 2 type of data: 
+  * array[0] = The current data
+  * array[1] = Function that updates this data!
+
+  * We should always use that function to update the data.
+
+  5. Using teh function to update the data in a State:
+  * setChatMessages([...chatMessages])
+  * ...chatMessages -> Spread Operator (...)
+  = takes the value in an array and copies them into a new array
+
+  Review: State is a data that is connected to the HTML, 
+  When we update the data, it updates the HTML
+  It gives two data, one is teh current, second is the function that updates the data. 
+  
+
+  6. Array destructuring: 
+  array = [1, 2, 3, 4]
+  const [firtNum, secondNum, thirdNum, fourthNum] = array; 
+
+  then firstNum = 1, secondNum = 2, thirdNum = 3, fourthNum = 4
+
+-->
 
 <!DOCTYPE html>
 <html>
@@ -93,29 +167,67 @@
           </div>
         );
       }
+
+      function ChatMessages() {
+        // Making a state:
+        const array = React.useState([{
+          message: 'Hi chatbot', 
+          sender: 'user', 
+          id: 'id_1'
+        }, {
+          message: 'Hello! How cna I help you?', 
+          sender: 'robot', 
+          id: 'id_2'
+        }, {
+          message: 'Can you give me today\'s date?', 
+          sender: 'user', 
+          id: 'id_3'
+        }, {
+          message: 'Today is January 21st 2026', 
+          sender: 'robot', 
+          id: 'id_4'
+        }]); 
+        const chatMessages = array[0]; 
+        const setChatMessages = array[1]; 
+        // Shortcut: Arraydestructuring: 
+        // const [chatMessages, setChatMessages] = array; 
+        const chatMessageComponents = chatMessages.map((list_elem) => {
+          return (
+            <ChatMessage 
+              message={list_elem.message} 
+              sender={list_elem.sender}
+              key={list_elem.id}
+            /> 
+          ); 
+        });
+
+        function sendMessage(){
+          setChatMessages([
+            ...chatMessages, 
+            {
+              message : 'test', 
+              sender: 'user', 
+              id: crypto.randomUUID()
+            }
+          ]); 
+
+          console.log(chatMessages); 
+        }
+
+        return (
+          <>
+            <button onClick={sendMessage}>Send Message</button>
+            {chatMessageComponents}
+          </>
+        ); 
+      }
+
+
       function App() {
         return (
             <>
               <ChatInput /> 
-              <ChatMessage 
-                message="Hi chatbot" 
-                sender="user" 
-              />
-
-              <ChatMessage 
-                message="Hello! How cna I help you?" 
-                sender="robot"
-              />
-
-              <ChatMessage 
-                message="Can you give me today's date?" 
-                sender="user" 
-              />
-
-              <ChatMessage 
-                message="Today is January 21st 2026" 
-                sender="robot"
-              />
+              <ChatMessages />
             </>
         ); 
       }
